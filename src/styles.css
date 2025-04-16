@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --keevo-purple: #6f2dbd;
+    --keevo-light-purple: #b57fe7;
+    --keevo-bg: #f5f1fa;
+    --keevo-dark: #231942;
+    --white: #ffffff;
+    --gray: #f0f0f0;
+  }

@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="header">
+    <img src="assets/logo-keevo.png" alt="Keevo Logo" />
+  </div>  
+  <!-- Formulário de nova tarefa -->
+  <div class="form-container">
+    <form (submit)="editarModo ? salvarEdicao() : adicionarTarefa(); $event.preventDefault()">
+      <h2>{{ editarModo ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
+
+      <input type="text" [(ngModel)]="novaTarefa.titulo" name="titulo" placeholder="Título da tarefa" required />
+      <textarea [(ngModel)]="novaTarefa.descricao" name="descricao" placeholder="Descrição (opcional)"></textarea>
+
+      <select [(ngModel)]="novaTarefa.status" name="status">
+        <option value="Pendente">Pendente</option>
+        <option value="EmAndamento">Em Andamento</option>
+        <option value="Concluida">Concluída</option>
+      </select>
+
+      <div class="form-buttons">
+        <button type="submit">{{ editarModo ? 'Salvar' : 'Adicionar' }}</button>
+        <button *ngIf="editarModo" type="button" (click)="cancelarEdicao()" class="cancel-btn">Cancelar</button>
+      </div>
+    </form>
+
+    <h2></h2>
+
+    <!-- Filtro de tarefas -->
+    <div class="filter-container">
+      <label for="filtro">Filtrar por status:</label>
+      <select id="filtro" [(ngModel)]="filtroStatus" (change)="buscarPorStatus()">
+        <option value="">Todos</option>
+        <option value="Pendente">Pendente</option>
+        <option value="EmAndamento">Em Andamento</option>
+        <option value="Concluida">Concluída</option>
+      </select>
+    </div>
+
+    <!-- Lista de tarefas com acordeons -->
+    <div class="accordion-list">
+      <div *ngFor="let tarefa of tarefas" class="accordion-card">
+        <details>
+          <summary>
+            <span class="titulo">{{ tarefa.titulo }}</span>
+            <span class="status-badge" [ngClass]="tarefa.status">{{ tarefa.status }}</span>
+          </summary>
+
+          <div class="accordion-content">
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Criado em:</strong> {{ tarefa.dataCriacao | date: 'short' }}</p>
+            <p *ngIf="tarefa.dataConclusao"><strong>Concluído em:</strong> {{ tarefa.dataConclusao | date:'short' }}</p>
+
+            <div class="task-buttons">
+              <button *ngIf="tarefa.status !== 'Concluida'" (click)="concluirTarefa(tarefa)"
+                class="btn-blue">Concluir</button>
+              <button (click)="iniciarEdicao(tarefa)" class="btn-yellow">Editar</button>
+              <button (click)="deletarTarefa(tarefa.id)" class="btn-red">Excluir</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+</div>
