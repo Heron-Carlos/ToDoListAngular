@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <img src="assets/logo-keevo.png" alt="Keevo Logo" />
-  </div>  
+  </div>
   <!-- Formulário de nova tarefa -->
   <div class="form-container">
     <form (submit)="editarModo ? salvarEdicao() : adicionarTarefa(); $event.preventDefault()">
@@ -21,9 +21,10 @@
         <button *ngIf="editarModo" type="button" (click)="cancelarEdicao()" class="cancel-btn">Cancelar</button>
       </div>
     </form>
-
-    <h2></h2>
-
+  </div>
+  <h2></h2>
+  <div class="form-container">
+    <h2>Tarefas Criadas</h2>
     <!-- Filtro de tarefas -->
     <div class="filter-container">
       <label for="filtro">Filtrar por status:</label>
@@ -59,6 +60,9 @@
         </details>
       </div>
     </div>
+      <button (click)="exportarParaExcel()" class="btn-export">
+        📁 Exportar para Excel
+      </button>
   </div>
 
 </div>

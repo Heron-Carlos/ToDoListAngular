@@ -17,8 +17,17 @@
   border-radius: 12px;
 }
 
+.header2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background-color: #f5f0fc;
+  border-radius: 12px;
+}
+
 .header img {
-  height: 100px;
+  height: 80px;
 }
 
 .form-container {
@@ -72,6 +81,7 @@ button:hover {
 button[type="submit"] {
   background-color: var(--keevo-purple);
   color: white;
+  font-weight: bold;
 }
 
 .cancel-btn {
@@ -79,7 +89,7 @@ button[type="submit"] {
 }
 
 .filter-container {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -87,7 +97,7 @@ button[type="submit"] {
 
 .filter-container select{
   position: relative;
-  width: 10cm;
+  width: 5cm;
   top: 0.2cm;
 }
 .filter-container label {
@@ -180,3 +190,31 @@ summary {
   background-color: #a5d6a7;
   color: #1b5e20;
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.btn-export {
+  background-color: var(--keevo-purple);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 1rem auto 0 auto;
+}
+
+
+.btn-export:hover {
+  background-color: #5b55e3;
+}
+
+
+

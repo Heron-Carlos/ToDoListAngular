@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../toast/toast.service';
+import { TaskService } from '../../services/task.service';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-task-list',
@@ -18,7 +21,7 @@ export class TaskListComponent implements OnInit {
   tarefaEditandoId: string | null = null;
   filtroStatus: string = '';
 
-  constructor(private http: HttpClient, private toastService: ToastService) { }
+  constructor(private http: HttpClient, private toastService: ToastService, private taskService: TaskService ) { }
 
   ngOnInit(): void {
     this.buscarTodas();
@@ -100,4 +103,17 @@ export class TaskListComponent implements OnInit {
         this.toastService.show('Tarefa concluída!', 'success');
       });
   }
+
+  exportarParaExcel() {
+    this.http.get('http://localhost:5235/api/Tasks/exportar-excel', {
+      responseType: 'blob'
+    }).subscribe((response: Blob) => {
+      const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      saveAs(blob, 'tarefas.xlsx');
+    }, error => {
+      this.toastService.show('Erro ao exportar tarefas. Tente novamente.', 'error');
+    });
+  
+  }
+  
 }
